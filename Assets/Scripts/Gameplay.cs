@@ -13,6 +13,11 @@ public class Character
         this.name = n;
         this.hp = hp;
     }
+    public void ReceiveDamage(int damage) // Method
+    {
+        hp -= damage;
+        if (hp < 0) hp = 0;
+    }
 }
 
 public class Gameplay : MonoBehaviour
@@ -24,7 +29,7 @@ public class Gameplay : MonoBehaviour
     void Start()
     {
         // ใช้ field player โดยตรง ไม่สร้างตัวแปรใหม่
-        player = new Character("PicoChan", 80);
+        player = new Character("PicoChan", 100);
 
         playerName = GameObject.Find("PlayerName").GetComponent<TextMeshProUGUI>();
         hpBar = GameObject.Find("HP").GetComponent<Image>();
@@ -37,4 +42,6 @@ public class Gameplay : MonoBehaviour
         // Cast int -> float เพื่อให้ได้ค่า 0.0 ถึง 1.0
         hpBar.fillAmount = (float)player.hp / 100f;
     }
+    
+
 }
