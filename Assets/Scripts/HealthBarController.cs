@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthBarController : MonoBehaviour
@@ -13,16 +13,16 @@ public class HealthBarController : MonoBehaviour
 
     void Start()
     {
-        // ��˹���������������آ�Ҿ
+        // กำหนดค่าเริ่มต้นให้สุขภาพ
         currentHealth = maxHealth;
 
-        // �Ѿഷ Health Bar �������
+        // อัพเดท Health Bar เริ่มต้น
         UpdateHealthBar();
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        // ��Ǩ�ͺ��Ҫ��Ѻ�ѵ�ط���� tag "Dangerous"
+        // ตรวจสอบว่าชนกับวัตถุที่มี tag "Dangerous"
         if (collision.gameObject.CompareTag("Dangerous"))
         {
             TakeDamage(damageAmount);
@@ -31,7 +31,7 @@ public class HealthBarController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // ��Ǩ�ͺ��Ҫ��Ѻ�ѵ�ط���� tag "Dangerous" (����Ѻ Trigger Collider)
+        // ตรวจสอบว่าชนกับวัตถุที่มี tag "Dangerous" (สำหรับ Trigger Collider)
         if (other.CompareTag("Dangerous"))
         {
             TakeDamage(damageAmount);
@@ -40,16 +40,16 @@ public class HealthBarController : MonoBehaviour
 
     void TakeDamage(float damage)
     {
-        // Ŵ�آ�Ҿ
+        // ลดสุขภาพ
         currentHealth -= damage;
 
-        // ��Ǩ�ͺ�������آ�Ҿ��ӡ��� 0
+        // ตรวจสอบไม่ให้สุขภาพต่ำกว่า 0
         currentHealth = Mathf.Max(0, currentHealth);
 
-        // �Ѿഷ Health Bar
+        // อัพเดท Health Bar
         UpdateHealthBar();
 
-        // ��Ǩ�ͺ����آ�Ҿ�� 0 �������
+        // ตรวจสอบว่าสุขภาพเป็น 0 หรือไม่
         if (currentHealth <= 0)
         {
             Die();
@@ -58,7 +58,7 @@ public class HealthBarController : MonoBehaviour
 
     void UpdateHealthBar()
     {
-        // �Ѿഷ Fill Amount �ͧ Image
+        // อัพเดท Fill Amount ของ Image
         if (healthBarFill != null)
         {
             healthBarFill.fillAmount = currentHealth / maxHealth;
@@ -67,7 +67,7 @@ public class HealthBarController : MonoBehaviour
 
     void Die()
     {
-        // ����� Player ���ͨѴ���������آ�Ҿ�� 0
+        // ทำลาย Player หรือจัดการเมื่อสุขภาพเป็น 0
         Debug.Log("Player died!");
         // Destroy(gameObject);
     }
